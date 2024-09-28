@@ -166,7 +166,7 @@ function procesarCarrito(carrito) {
   
   // Mostrar el total en una alerta y en la consola
   alert(`El total a pagar por su compra es: ${total}`);
-  console.log(`El total a pagar por su compra es: ${total}`);
+  console.log('El total a pagar por su compra es: ${total}');
   
   // Filtrar los productos con precio mayor a 400
   const mayorCosto = carrito.filter((el) => el.precio > 400);
@@ -178,6 +178,8 @@ function procesarCarrito(carrito) {
     console.log('No hay productos con precio mayor a 400.');
   }
 }
+
+
 
   
  
