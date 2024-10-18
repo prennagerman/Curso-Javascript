@@ -2,37 +2,7 @@
 const shopContent = document.getElementById("shopContent")
 const verCarrito = document.getElementById("verCarrito")
 const modalContainer = document.getElementById("modalContainer")
-const productos = [
-     
-    {
-    id:1,
-    nombre:"nueces",
-    precio: 120,
-    cantidad:1,
-    img:"https://tse1.mm.bing.net/th?id=OIP.untn8SAydJEzlKTSRLySFQHaEb&pid=Api&P=0&h=180"
-},
-{
-    id:2,
-    nombre:"pasas de un va",
-    precio: 120,
-    cantidad:1,
-    img:"https://tse4.mm.bing.net/th?id=OIP.NyjXHOO5gBPhLUWKjkpz4AHaE3&pid=Api&P=0&h=180",
-},
-{
-    id:3,
-    nombre:"almendras",
-    precio: 120,
-    cantidad:1,
-    img:"https://tse3.mm.bing.net/th?id=OIP.eunHk_tH70sNfPn_KW1dwQHaE6&pid=Api&P=0&h=180",
-},
-{
-    id:4,
-    nombre:"mix frutal",
-    precio: 120,
-    cantidad:1,
-    img:"https://tse3.mm.bing.net/th?id=OIP.kms8ZzEoyZEJHMPkpz56ugHaHC&pid=Api&P=0&h=180",
-},
-]
+
 
 let carrito = []
 
@@ -85,10 +55,11 @@ cantidad:prod.cantidad,
 console.log(carrito)
 }
 })
-
-verCarrito.addEventListener("click", ()=>{
+})
+const cubrircarrito=()=>{
      
     modalContainer.innerHTML = ""
+    modalContainer.style.display = "flex"
     const modalHeader = document.createElement("h1");
 
     modalHeader.className = "modal-header";
@@ -106,7 +77,8 @@ modal-button-header`
 
 
 modalButton.addEventListener("click",()=>{
-    modalButton.style.display = "none"
+    modalContainer.style.display = "none"
+    
 })
 modalHeader.append(modalButton)
 
@@ -122,6 +94,16 @@ carrito.forEach((prod)=>{
     <p> ${prod.cantidad}</p>`
 
     modalContainer.append(modalContent)
+
+
+    let eliminar = document.createElement("span");
+
+    eliminar.innerText = "x"
+    eliminar.className = "eliminar-producto"
+
+    modalContent.append(eliminar)
+
+    eliminar.addEventListener("click", eliminarProducto)
 })
 
 const total = carrito.reduce((acc, el)=>acc +  el.precio * el.cantidad, 0)
@@ -134,5 +116,17 @@ total a pagar: $${total}.
 `
 modalContainer.append(totalpro)
 
-})
-})
+}
+
+ verCarrito.addEventListener("click", cubrircarrito)
+
+ const eliminarProducto =()=>{
+    const encontrarId = carrito.find((element)=> element.id)
+
+    carrito= carrito.filter((carritoId)=>{
+        return carritoId !== encontrarId
+    })
+
+    cubrircarrito()
+ }
+
